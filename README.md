@@ -1,24 +1,3 @@
-# vue2-file-upload
 
-## Project setup
-```
-npm install
-```
+## 实现多种方式的文件上传
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
