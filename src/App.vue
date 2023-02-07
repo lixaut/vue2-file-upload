@@ -6,33 +6,44 @@
       <el-container>
         <!-- 侧边导航栏 -->
         <el-aside>
-          <el-menu>
-            <el-menu-item index="1">
+          <el-menu default-active="1">
+            <el-menu-item v-for="item in menuData" :key="item.id" :index="item.id" @click="goPath(item.path)">
               <i class="el-icon-upload"></i>
-              <span>方式1</span>
-            </el-menu-item>
-            <el-menu-item index="2">
-              <i class="el-icon-upload"></i>
-              <span>方式2</span>
-            </el-menu-item>
-            <el-menu-item index="3">
-              <i class="el-icon-upload"></i>
-              <span>方式3</span>
+              <span>{{item.name}}</span>
             </el-menu-item>
           </el-menu>
         </el-aside>
         <!-- 主内容区 -->
-        <el-main>main</el-main>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
       </el-container>
     </el-container>
   </div>
 </template>
 
 <script>
+import router from './router'
 
 export default {
   name: 'App',
-  components: {
+  data() {
+    return {
+      menuData: [
+        { id: '1', name: 'Form-Data', path: '/formData' },
+        { id: '2', name: 'Base64', path: '/base64' },
+        { id: '3', name: '缩略图处理', path: '/thumbnail' },
+        { id: '4', name: '进度管控', path: '/process' },
+        { id: '5', name: '多文件上传', path: '/multiFiles' },
+        { id: '6', name: '拖拽上传', path: '/drag' },
+        { id: '7', name: '大文件上传', path: '/bigFile' }
+      ]
+    }
+  },
+  methods: {
+    goPath(path) {
+      router.push(path)
+    }
   }
 }
 </script>

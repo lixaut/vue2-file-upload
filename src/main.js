@@ -17,8 +17,12 @@ Vue.use(Main)
 Vue.use(Menu)
 Vue.use(MenuItem)
 
+// 引入 router
+import router from '@/router'
+
 Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
+  router
 }).$mount('#app')
