@@ -1,5 +1,10 @@
 <template>
-  <Upload :title="name"></Upload>
+  <Upload :title="name">
+    <el-button type="primary">上传图片</el-button>
+    <div class="info">
+      <span>只能上传 JPG/PNG 格式图片，且大小不能超过2MB</span>
+    </div>
+  </Upload>
 </template>
 
 <script>
@@ -15,6 +20,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped lang="scss">
+.info {
+  span {
+    font-size: 12px;
+    color: #aaa;
+  }
+}
 </style>

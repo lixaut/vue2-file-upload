@@ -1,5 +1,7 @@
 <template>
-  <Upload :title="name"></Upload>
+  <Upload :title="name">
+    <el-button type="primary">上传文件</el-button>
+  </Upload>
 </template>
 
 <script>

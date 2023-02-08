@@ -1,7 +1,9 @@
 <template>
   <div class="main-container">
     <h3>{{title}}</h3>
-    <div class="body"></div>
+    <div class="body">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -16,13 +18,13 @@ export default {
 .main-container {
   width: 500px;
   height: 300px;
-  // background-color: #eee;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   .body {
     height: 240px;
     border: 1px dashed #333;
+    padding: 10px;
   }
 }
 </style>

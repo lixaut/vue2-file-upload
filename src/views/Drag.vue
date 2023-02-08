@@ -1,5 +1,9 @@
 <template>
-  <Upload :title="name"></Upload>
+  <Upload :title="name">
+    <div class="dragArea">
+      <i class="el-icon-folder-add"></i>
+    </div>
+  </Upload>
 </template>
 
 <script>
@@ -16,4 +20,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.dragArea {
+  i {
+    font-size: 50px;
+    color: #aaa;
+  }
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>

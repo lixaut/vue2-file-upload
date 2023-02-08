@@ -8,7 +8,8 @@ import {
   Aside,
   Main,
   MenuItem,
-  Menu
+  Menu,
+  Button
 } from 'element-ui'
 Vue.use(Container)
 Vue.use(Header)
@@ -16,6 +17,7 @@ Vue.use(Aside)
 Vue.use(Main)
 Vue.use(Menu)
 Vue.use(MenuItem)
+Vue.use(Button)
 
 // 引入 router
 import router from '@/router'
