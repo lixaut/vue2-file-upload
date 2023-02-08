@@ -23,7 +23,7 @@ export default {
   justify-content: space-around;
   .body {
     height: 240px;
-    border: 1px dashed #333;
+    border: 1px dashed #aaa;
     padding: 10px;
   }
 }

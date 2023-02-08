@@ -9,7 +9,9 @@ import {
   Main,
   MenuItem,
   Menu,
-  Button
+  Button,
+  Message,
+  Tag
 } from 'element-ui'
 Vue.use(Container)
 Vue.use(Header)
@@ -18,6 +20,8 @@ Vue.use(Main)
 Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Button)
+Vue.use(Tag)
+Vue.prototype.$message = Message
 
 // 引入 router
 import router from '@/router'
