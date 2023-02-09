@@ -1,6 +1,6 @@
 <template>
   <Upload :title="name">
-    <input ref="selectInpRef" type="file" class="upload-inp" style="display:none">
+    <input ref="selectInpRef" type="file" style="display:none">
     <el-button icon="el-icon-folder-opened" type="primary" @click="selectFile" :disabled="loadState">选择文件</el-button>
     <el-button icon="el-icon-upload" type="success" @click="uploadFile" :loading="loadState">上传文件</el-button>
     <div class="info">
