@@ -1,3 +1,4 @@
+import SparkMD5 from "spark-md5";
 
 // 限制文件 大小 & 格式
 export const isSuitable = (file, _this) => {
@@ -28,6 +29,30 @@ export const changeToBase64 = file => {
     fr.readAsDataURL(file);
     fr.onload = function() {
       resolve(this.result)
+    };
+  });
+};
+
+// 根据文件内容生成 HASH 值 (Promise)
+export const changeToHash = file => {
+  return new Promise(resolve => {
+    let fr = new FileReader();
+    fr.readAsArrayBuffer(file);
+    fr.onload = function() {
+      let buffer = this.result,
+        HASH,
+        spark,
+        suffix;
+      spark = new SparkMD5.ArrayBuffer();
+      spark.append(buffer);
+      HASH = spark.end();
+      suffix = /\.([0-9a-zA-Z]+)$/.exec(file.name)[1];
+      resolve({
+        buffer,
+        HASH,
+        suffix,
+        fileName: `${HASH}.${suffix}`
+      });
     };
   });
 };

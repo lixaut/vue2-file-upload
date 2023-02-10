@@ -15,8 +15,8 @@
 
 <script>
 import Upload from '@/components/Upload.vue';
-import { reqFormdata } from '@/api';
-import { isSuitable, changeToBase64 } from '@/utils';
+import { reqUploadHash } from '@/api';
+import { isSuitable, changeToBase64, changeToHash } from '@/utils';
 export default {
   name: 'Thumbnail',
   components: { Upload },
@@ -47,12 +47,14 @@ export default {
         return;
       }
       this.loadState = true;
+      let { fileName } = await changeToHash(this.file)
       let data = {
-        file: this.file,
-        fileName: this.file.name
+        file: encodeURIComponent(this.base64),
+        fileName,
+        fileOriName: this.file.name
       };
       try {
-        const res = await reqFormdata(data);
+        const res = await reqUploadHash(data);
         if (res.code === 0) {
           this.$message({
             message: '文件上传成功！',
