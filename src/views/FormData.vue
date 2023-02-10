@@ -13,8 +13,9 @@
 </template>
 
 <script>
-import Upload from '@/components/Upload.vue'
-import { reqFormdata } from '@/api'
+import Upload from '@/components/Upload.vue';
+import { reqFormdata } from '@/api';
+import { isSuitable } from '@/utils';
 export default {
   name: 'FormData',
   components: { Upload },
@@ -29,45 +30,29 @@ export default {
   },
   mounted() {
     // 监听文件选择
-    this.fileListener()
+    this.fileListener();
   },
   methods: {
     // 监听用户选择文件操作
     fileListener() {
-      const that = this
+      const that = this;
       that.$refs.selectInpRef.addEventListener('change', function() {
-        let _file = this.files[0]
-        if (!_file) return
-        // 限制文件上传的格式
-        if (!/(PNG|JPG|JPEG)/i.test(_file.type)) {
-          that.$message({
-            message: '不支持该文件格式，请重新选择！',
-            type: 'warning'
-          })
-          return
-        }
-        // 限制文件上传的大小
-        if (_file.size > 2 * 1024 * 1024) {
-          that.$message({
-            message: '文件超出大小限制，请重新选择！',
-            type: 'warning'
-          })
-          return
-        }
-        that.file = _file
-        that.fileName = _file.name
-        that.showTip = false
-      })
+        let _file = this.files[0];
+        if (!isSuitable(_file, that)) return;
+        that.file = _file;
+        that.fileName = _file.name;
+        that.showTip = false;
+      });
     },
     // 选择文件按钮触发函数
     selectFile() {
-      this.$refs.selectInpRef.click()
+      this.$refs.selectInpRef.click();
     },
     // 删除文件
     closeTag() {
-      this.showTip = true
-      this.file = null
-      this.fileName = ''
+      this.showTip = true;
+      this.file = null;
+      this.fileName = '';
     },
     // 上传文件
     uploadFile() {

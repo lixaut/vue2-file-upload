@@ -11,6 +11,7 @@
 <script>
 import Upload from '@/components/Upload.vue';
 import { reqUrlencoded } from '@/api';
+import { isSuitable, changeToBase64 } from '@/utils'
 export default {
   name: 'Base64',
   components: { Upload },
@@ -21,68 +22,47 @@ export default {
     }
   },
   mounted() {
-    this.fileListener()
+    this.fileListener();
   },
   methods: {
     // 上传按钮
     uploadBtn() {
-      this.$refs.fileInpRef.click()
+      this.$refs.fileInpRef.click();
     },
     // 选择文件操作监听
     fileListener() {
-      let that = this
+      let that = this;
       this.$refs.fileInpRef.addEventListener('change', async function() {
-        let file = this.files[0]
-        if (!file) return
-        // 限制文件上传的格式
-        if (!/(PNG|JPG|JPEG)/i.test(file.type)) {
-          that.$message({
-            message: '不支持该文件格式，请重新选择！',
-            type: 'warning'
-          })
-          return
-        }
-        // 限制文件上传的大小
-        if (file.size > 2 * 1024 * 1024) {
-          that.$message({
-            message: '文件超出大小限制，请重新选择！',
-            type: 'warning'
-          })
-          return
-        }
+        let file = this.files[0];
+        // 判断文件是否合适
+        if (!isSuitable(file, that)) return;
         // 文件转码
-        const BASE64 = await new Promise(resolve => {
-          let fileReader = new FileReader()
-          fileReader.readAsDataURL(file)
-          fileReader.onload = e => {
-            resolve(e.target.result)
-          }
-        })
+        const BASE64 = await changeToBase64(file);
         // 上传状态
-        that.loading = true
+        that.loading = true;
         // 文件上传
         let data = {
           file: encodeURIComponent(BASE64),
           fileName: file.name
-        }
+        };
         try {
-          const res = await reqUrlencoded(data)
+          const res = await reqUrlencoded(data);
           if (res.code === 0) {
             that.$message({
               message: '文件上传成功！',
               type: 'success'
-            })
+            });
             return;
           }
           throw res.codeText;
         } catch (err) {
-          console.log(err)
+          console.log(err);
           that.$message({
             message: '文件上传失败，请您稍后再试！',
             type: 'error'
-          })
+          });
         } finally {
-          that.loading = false
+          that.loading = false;
         }
       })
     }

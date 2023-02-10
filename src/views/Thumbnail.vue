@@ -16,6 +16,7 @@
 <script>
 import Upload from '@/components/Upload.vue';
 import { reqFormdata } from '@/api';
+import { isSuitable, changeToBase64 } from '@/utils';
 export default {
   name: 'Thumbnail',
   components: { Upload },
@@ -71,40 +72,15 @@ export default {
         this.closeThumbBtn();
       }
     },
-    // 转换格式为 BASE64
-    changeToBase64(file) {
-      return new Promise(resolve => {
-        let fileReader = new FileReader();
-        fileReader.readAsDataURL(file);
-        fileReader.onload = function() {
-          resolve(this.result);
-        };
-      });
-    },
     // inp 按钮监听
     inpAddListener() {
       const that = this;
       this.$refs.selectInpRef.addEventListener('change', async function() {
         let _file = this.files[0];
-        if (!_file) return;
-        // 限制文件上传的格式
-        if (!/(PNG|JPG|JPEG)/i.test(_file.type)) {
-          that.$message({
-            message: '不支持该文件格式，请重新选择！',
-            type: 'warning'
-          });
-          return;
-        }
-        // 限制文件上传的大小
-        if (_file.size > 2 * 1024 * 1024) {
-          that.$message({
-            message: '文件超出大小限制，请重新选择！',
-            type: 'warning'
-          });
-          return;
-        }
+        // 检查文件 格式 & 大小
+        if (!isSuitable(_file, that)) return;
         that.file = _file;
-        that.base64 = await that.changeToBase64(_file);
+        that.base64 = await changeToBase64(_file);
         that.showTip = false;
       });
     },
