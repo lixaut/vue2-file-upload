@@ -32,7 +32,7 @@ export default {
         { id: '1', name: 'Form-Data', path: '/formData' },
         { id: '2', name: 'Base64', path: '/base64' },
         { id: '3', name: '缩略图处理', path: '/thumbnail' },
-        { id: '4', name: '进度管控', path: '/process' },
+        { id: '4', name: '进度管控', path: '/progress' },
         { id: '5', name: '多文件上传', path: '/multiFiles' },
         { id: '6', name: '拖拽上传', path: '/drag' },
         { id: '7', name: '大文件上传', path: '/bigFile' }

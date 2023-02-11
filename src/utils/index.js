@@ -1,6 +1,12 @@
 import SparkMD5 from "spark-md5";
 
 // 限制文件 大小 & 格式
+/**
+ * 
+ * @param {File} file 
+ * @param {Vm} _this 
+ * @returns 合适 true, 不合适 false
+ */
 export const isSuitable = (file, _this) => {
   if (!file) return false;
   // 限制文件上传的格式
@@ -54,5 +60,14 @@ export const changeToHash = file => {
         fileName: `${HASH}.${suffix}`
       });
     };
+  });
+};
+
+// 延迟函数 (Promise)
+export const delay = (interval = 1000) => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, interval);
   });
 };

@@ -21,9 +21,24 @@ export const reqUrlencoded = data => request({
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 });
 
+// 缩略图上传api
 export const reqUploadHash = data => request({
   url: '/upload_single_hash',
   method: 'post',
   data,
   headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 });
+
+// 进度管理上传
+export const reqProgress = data => {
+  let formData = new FormData();
+  formData.append('file', data.file);
+  formData.append('fileName', data.fileName);
+  return request({
+    url: '/upload_single_formdata',
+    method: 'post',
+    data: formData,
+    onUploadProgress: data.func,
+    maxRate: [ 10 * 1024 ]
+  });
+};

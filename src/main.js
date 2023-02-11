@@ -11,7 +11,8 @@ import {
   Menu,
   Button,
   Message,
-  Tag
+  Tag,
+  Progress
 } from 'element-ui'
 Vue.use(Container)
 Vue.use(Header)
@@ -21,6 +22,7 @@ Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Button)
 Vue.use(Tag)
+Vue.use(Progress)
 Vue.prototype.$message = Message
 
 // 引入 router
