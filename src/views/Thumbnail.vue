@@ -5,7 +5,7 @@
     <el-button icon="el-icon-upload" type="success" @click="uploadFile" :loading="loadState">上传文件</el-button>
     <div class="info">
       <span v-if="showTip">只能上传 PNG/JPG/JPEG 格式图片，且大小不能超过2MB</span>
-      <ThumbItem v-else :imgSrc="base64"></ThumbItem>
+      <ThumbItem v-else :imgSrc="base64" @close="closeThumbBtn"></ThumbItem>
     </div>
   </Upload>
 </template>

@@ -38,7 +38,6 @@ export const reqProgress = data => {
     url: '/upload_single_formdata',
     method: 'post',
     data: formData,
-    onUploadProgress: data.func,
-    maxRate: [ 10 * 1024 ]
+    onUploadProgress: data.func
   });
 };
