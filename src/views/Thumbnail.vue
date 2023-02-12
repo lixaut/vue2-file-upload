@@ -5,21 +5,19 @@
     <el-button icon="el-icon-upload" type="success" @click="uploadFile" :loading="loadState">上传文件</el-button>
     <div class="info">
       <span v-if="showTip">只能上传 PNG/JPG/JPEG 格式图片，且大小不能超过2MB</span>
-      <div v-else class="thumbnail">
-        <img :src="base64" alt="">
-        <i class="el-icon-close" @click="closeThumbBtn"></i>
-      </div>
+      <ThumbItem v-else :imgSrc="base64"></ThumbItem>
     </div>
   </Upload>
 </template>
 
 <script>
 import Upload from '@/components/Upload.vue';
+import ThumbItem from '@/components/ThumbItem.vue';
 import { reqUploadHash } from '@/api';
 import { isSuitable, changeToBase64, changeToHash } from '@/utils';
 export default {
   name: 'Thumbnail',
-  components: { Upload },
+  components: { Upload, ThumbItem },
   data() {
     return {
       name: '单一文件上传「缩略图处理」',
@@ -101,36 +99,6 @@ export default {
   span {
     font-size: 12px;
     color: #aaa
-  }
-  $defColor: #ddd;
-  $actColor: #aaa;
-  .thumbnail {
-    margin-top: 10px;
-    width: 100%;
-    height: 50px;
-    border: 1px solid $defColor;
-    border-radius: 10px;
-    position: relative;
-    .el-icon-close {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      font-size: 14px;
-      color: $defColor;
-      cursor: pointer;
-    }
-    img {
-      width: 44px;
-      height: 44px;
-      margin: 3px;
-      border-radius: 10px;
-    }
-  }
-  .thumbnail:hover {
-    border: 1px solid $actColor;
-    .el-icon-close {
-      color: $actColor;
-    }
   }
 }
 </style>
