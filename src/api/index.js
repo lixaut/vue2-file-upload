@@ -41,3 +41,30 @@ export const reqProgress = data => {
     onUploadProgress: data.func
   });
 };
+
+// 大文件上传 & 合并切片
+export const reqSliceMerge = data => request({
+  url: '/upload_merge',
+  method: 'post',
+  data,
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+});
+
+// 大文件上传 & 切片上传
+export const reqSliceUpload = data => {
+  let fd = new FormData();
+  fd.append('file', data.file);
+  fd.append('fileName', data.fileName);
+  return request({
+    url: '/upload_chunk',
+    method: 'post',
+    data: fd
+  });
+};
+
+// 大文件上传 & 已上传切片
+export const reqAlreadyUpload = params => request({
+  url: '/upload_already',
+  method: 'get',
+  params
+});

@@ -71,3 +71,23 @@ export const delay = (interval = 1000) => {
     }, interval);
   });
 };
+
+// 文件切片
+export const fileSlice = (file, HASH, suffix, maxCount = 100, size = 200 * 1024) => {
+  if (file.size < size) return;
+  let count = Math.ceil(file.size / size),
+    chunks = [],
+    i = 0;
+  if (count > maxCount) {
+    size = Math.ceil(file.size / maxCount);
+    count = maxCount;
+  }
+  while (i < count) {
+    chunks.push({
+      file: file.slice(i * size, (i + 1) * size),
+      fileName: `${HASH}_${i + 1}.${suffix}`
+    });
+    i++;
+  }
+  return chunks;
+}
